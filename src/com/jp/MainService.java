@@ -36,17 +36,20 @@ public class MainService extends WallpaperService {
 		Point corner3 = new Point(0, displayY);
 		Point corner4 = new Point(displayX, displayY);
 		
-		AnimationPoint one = new AnimationPoint(corner1.getX(), corner1.getY(), displayX/2, displayY/2, (int)corner1.getX(), (int)corner1.getY(), 1, 1);
-		AnimationPoint five = new AnimationPoint(corner1.getX() / 2, 0, displayX/2, displayY/2, (int)corner1.getX(), (int)corner1.getY(), 1, 0);
+		float slopeToCenter = ((corner1.getY() - corner4.getY()) / (corner1.getX() - corner4.getX()));
+		float slopeToCenter2 = ((corner2.getY() - corner3.getY()) / (corner2.getX() - corner3.getX()));
 		
-		AnimationPoint two = new AnimationPoint(corner2.getX(), corner2.getY(), displayX/2, displayY/2, (int)corner2.getX(), (int)corner2.getY(), -1, 1);
-		AnimationPoint six = new AnimationPoint(0, corner2.getY() / 2, displayX/2, displayY/2, (int)corner2.getX(), (int)corner2.getY(), 0, 1);
+		AnimationPoint one = new AnimationPoint(corner1.getX(), corner1.getY(), displayX/2, displayY/2, slopeToCenter, slopeToCenter);
+		AnimationPoint five = new AnimationPoint(0, corner3.getY() / 2, displayX/2, displayY/2, 1, 0);
 		
-		AnimationPoint three = new AnimationPoint(corner3.getX(), corner3.getY(), displayX/2, displayY/2, (int)corner3.getX(), (int)corner3.getY(), 1, -1);
-		AnimationPoint seven = new AnimationPoint(corner2.getX(), corner4.getY() / 2, displayX/2, displayY/2, (int)corner3.getX(), (int)corner3.getY(), 0, 1);
+		AnimationPoint two = new AnimationPoint(corner2.getX(), corner2.getY(), displayX/2, displayY/2, -1, 1);
+		AnimationPoint six = new AnimationPoint(corner2.getX() / 2, 0, displayX/2, displayY/2, 0, 1);
 		
-		AnimationPoint four = new AnimationPoint(corner4.getX(), corner4.getY(), displayX/2, displayY/2, (int)corner4.getX(), (int)corner4.getY(), -1, -1);
-		AnimationPoint eight = new AnimationPoint(corner4.getX() / 2, corner3.getY(), displayX/2, displayY/2, (int)corner3.getX(), (int)corner3.getY(), 0, -1);
+		AnimationPoint three = new AnimationPoint(corner3.getX(), corner3.getY(), displayX/2, displayY/2, 1, -1);
+		AnimationPoint seven = new AnimationPoint(corner2.getX(), corner4.getY() / 2, displayX/2, displayY/2, -1, 0);
+		
+		AnimationPoint four = new AnimationPoint(corner4.getX(), corner4.getY(), displayX/2, displayY/2, -1, -1);
+		AnimationPoint eight = new AnimationPoint(corner4.getX() / 2, corner3.getY(), displayX/2, displayY/2, 0, -1);
 		
 		RenderEngine() {}
 		
@@ -89,6 +92,7 @@ public class MainService extends WallpaperService {
 					c.drawLine(x/3*2, y/3*2, x/2, y/2, p2);
 					*/
 					c.drawLine(one.getXStart(), one.getYStart(), one.getXEnd(), one.getYEnd(), p2);
+					/*
 					c.drawLine(two.getXStart(), two.getYStart(), two.getXEnd(), two.getYEnd(), p2);
 					c.drawLine(three.getXStart(), three.getYStart(), three.getXEnd(), three.getYEnd(), p2);
 					c.drawLine(four.getXStart(), four.getYStart(), four.getXEnd(), four.getYEnd(), p2);
@@ -96,17 +100,18 @@ public class MainService extends WallpaperService {
 					c.drawLine(six.getXStart(), six.getYStart(), six.getXEnd(), six.getYEnd(), p2);
 					c.drawLine(seven.getXStart(), seven.getYStart(), seven.getXEnd(), seven.getYEnd(), p2);
 					c.drawLine(eight.getXStart(), eight.getYStart(), eight.getXEnd(), eight.getYEnd(), p2);
-					
-					one.drawAnimation(70, 500);
-					two.drawAnimation(50, 500);
-					three.drawAnimation(45, 500);
-					four.drawAnimation(40, 500);
-					five.drawAnimation(70, 500);
-					six.drawAnimation(50, 500);
-					seven.drawAnimation(45, 500);
-					eight.drawAnimation(40, 500);
-					
-					if(one.getAnimationX() > 4000) {
+					*/
+					one.drawAnimation2(30, 40, 500);
+					/*
+					two.drawAnimation(50, 50, 500);
+					three.drawAnimation(45, 45, 500);
+					four.drawAnimation(40, 40, 500);
+					five.drawAnimation(70, 70, 500);
+					six.drawAnimation(50, 50, 500);
+					seven.drawAnimation(45, 45, 500);
+					eight.drawAnimation(40, 40, 500);
+					*/
+					if(one.getAnimationX() > 1000) {
 						one.setAnimationX((int)corner1.getX());
 						one.setAnimationY((int)corner1.getY());
 						two.setAnimationX((int)corner2.getX());
@@ -115,10 +120,11 @@ public class MainService extends WallpaperService {
 						three.setAnimationY((int)corner3.getY());
 						four.setAnimationX((int)corner4.getX());
 						four.setAnimationY((int)corner4.getY());
-						five.setAnimationX((int)corner1.getX() / 2);
-						five.setAnimationY(0);
-						six.setAnimationX(0);
-						six.setAnimationY((int)corner2.getY() / 2);
+						
+						five.setAnimationX(0);
+						five.setAnimationY((int)corner3.getY() / 2);
+						six.setAnimationX((int)corner2.getX() / 2);
+						six.setAnimationY(0);
 						seven.setAnimationX((int)corner2.getX());
 						seven.setAnimationY((int)corner4.getY() / 2);
 						eight.setAnimationX((int)corner4.getX() / 2);

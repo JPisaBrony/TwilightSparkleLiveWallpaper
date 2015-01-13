@@ -5,29 +5,44 @@ class AnimationPoint {
 	private float yStart;
 	private float xEnd;
 	private float yEnd;
-	private int animationX;
-	private int animationY;
-	private int multiplierX;
-	private int multiplierY;
+	private float animationX;
+	private float animationY;
+	private float multiplierX;
+	private float multiplierY;
+	private float slope;
 	
-	AnimationPoint(float x1, float y1, float x2, float y2, int aX, int aY, int mx, int my) {
+	AnimationPoint(float x1, float y1, float x2, float y2, float mx, float my) {
 		xStart = x1;
 		yStart = y1;
 		xEnd = x2;
 		yEnd = y2;
-		animationX = aX;
-		animationY = aY;
+		animationX = x1;
+		animationY = y1;
 		multiplierX = mx;
 		multiplierY = my;
+		slope = ((y1 - y2) / (x1 - x2));
 	}
 	
-	public void drawAnimation(int speed, int length) {
+	public void drawAnimation(int speedX, int speedY, int length) {
 		this.setXStart(this.getAnimationX());
 		this.setYStart(this.getAnimationY());
-		this.setAnimationX(animationX += speed * multiplierX);
-		this.setAnimationY(animationY += speed * multiplierY);
+		this.setAnimationX(animationX += speedX * multiplierX);
+		this.setAnimationY(animationY += speedY * multiplierY);
 		this.setXEnd(this.getAnimationX() - length * multiplierX);
 		this.setYEnd(this.getAnimationY() - length * multiplierY);
+	}
+	
+	public void drawAnimation2(int speedX, int speedY, int length) {
+		this.setXStart(this.getAnimationX() * slope);
+		this.setYStart(this.getAnimationY() * slope);
+		this.setAnimationX(animationX += speedX * slope * multiplierX);
+		this.setAnimationY(animationY += speedY * multiplierY);
+		this.setXEnd(this.getAnimationX() * slope - length);
+		this.setYEnd(this.getAnimationY() * slope - length);
+	}
+	
+	public void rotateLine() {
+		
 	}
 	
 	public float getXStart() {
@@ -45,19 +60,19 @@ class AnimationPoint {
 	public float getYEnd() {
 		return yEnd;
 	}
-	public int getAnimationX() {
+	public float getAnimationX() {
 		return animationX;
 	}
 
-	public void setAnimationX(int aX) {
+	public void setAnimationX(float aX) {
 		animationX = aX;
 	}
 
-	public int getAnimationY() {
+	public float getAnimationY() {
 		return animationY;
 	}
 
-	public void setAnimationY(int aY) {
+	public void setAnimationY(float aY) {
 		animationY = aY;
 	}
 
