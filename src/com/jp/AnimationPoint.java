@@ -1,6 +1,10 @@
 package com.jp;
 
 class AnimationPoint {
+	private float defaultXStart;
+	private float defaultYStart;
+	private float defaultXEnd;
+	private float defaultYEnd;
 	private float xStart;
 	private float yStart;
 	private float xEnd;
@@ -9,18 +13,20 @@ class AnimationPoint {
 	private float animationY;
 	private float multiplierX;
 	private float multiplierY;
-	private float slope;
+	private float slopeX;
+	private float slopeY;
 	
 	AnimationPoint(float x1, float y1, float x2, float y2, float mx, float my) {
-		xStart = x1;
-		yStart = y1;
-		xEnd = x2;
-		yEnd = y2;
+		defaultXStart = xStart = x1;
+		defaultYStart = yStart = y1;
+		defaultXEnd = xEnd = x2;
+		defaultYEnd = yEnd = y2;
 		animationX = x1;
 		animationY = y1;
 		multiplierX = mx;
 		multiplierY = my;
-		slope = ((y1 - y2) / (x1 - x2));
+		slopeX = ((x1 - x2) / (y1 - y2));
+		slopeY = ((y1 - y2) / (x1 - x2));
 	}
 	
 	public void drawAnimation(int speedX, int speedY, int length) {
@@ -32,17 +38,13 @@ class AnimationPoint {
 		this.setYEnd(this.getAnimationY() - length * multiplierY);
 	}
 	
-	public void drawAnimation2(int speedX, int speedY, int length) {
-		this.setXStart(this.getAnimationX() * slope);
-		this.setYStart(this.getAnimationY() * slope);
-		this.setAnimationX(animationX += speedX * slope * multiplierX);
-		this.setAnimationY(animationY += speedY * multiplierY);
-		this.setXEnd(this.getAnimationX() * slope - length);
-		this.setYEnd(this.getAnimationY() * slope - length);
-	}
-	
-	public void rotateLine() {
-		
+	public void drawAnimation2(float speed, float rotationX, float rotationY, int length) {
+		this.setXStart(this.getAnimationX() * rotationX * length / 2);
+		this.setYStart(this.getAnimationY() * rotationY * length / 2);
+		this.setAnimationX(animationX += speed * multiplierX);
+		this.setAnimationY(animationY += speed * multiplierY);
+		this.setXEnd(this.getAnimationX() * rotationX * length / 2);
+		this.setYEnd(this.getAnimationY() * rotationY * length / 2);
 	}
 	
 	public float getXStart() {

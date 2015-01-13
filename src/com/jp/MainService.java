@@ -36,10 +36,10 @@ public class MainService extends WallpaperService {
 		Point corner3 = new Point(0, displayY);
 		Point corner4 = new Point(displayX, displayY);
 		
-		float slopeToCenter = ((corner1.getY() - corner4.getY()) / (corner1.getX() - corner4.getX()));
-		float slopeToCenter2 = ((corner2.getY() - corner3.getY()) / (corner2.getX() - corner3.getX()));
+		//float slopeToCenter = ((corner1.getY() - corner4.getY()) / (corner1.getX() - corner4.getX()));
+		//float slopeToCenter2 = ((corner2.getY() - corner3.getY()) / (corner2.getX() - corner3.getX()));
 		
-		AnimationPoint one = new AnimationPoint(corner1.getX(), corner1.getY(), displayX/2, displayY/2, slopeToCenter, slopeToCenter);
+		AnimationPoint one = new AnimationPoint(corner1.getX(), corner1.getY(), displayX/2, displayY/2, 1, 1);
 		AnimationPoint five = new AnimationPoint(0, corner3.getY() / 2, displayX/2, displayY/2, 1, 0);
 		
 		AnimationPoint two = new AnimationPoint(corner2.getX(), corner2.getY(), displayX/2, displayY/2, -1, 1);
@@ -92,7 +92,7 @@ public class MainService extends WallpaperService {
 					c.drawLine(x/3*2, y/3*2, x/2, y/2, p2);
 					*/
 					c.drawLine(one.getXStart(), one.getYStart(), one.getXEnd(), one.getYEnd(), p2);
-					/*
+					
 					c.drawLine(two.getXStart(), two.getYStart(), two.getXEnd(), two.getYEnd(), p2);
 					c.drawLine(three.getXStart(), three.getYStart(), three.getXEnd(), three.getYEnd(), p2);
 					c.drawLine(four.getXStart(), four.getYStart(), four.getXEnd(), four.getYEnd(), p2);
@@ -100,8 +100,18 @@ public class MainService extends WallpaperService {
 					c.drawLine(six.getXStart(), six.getYStart(), six.getXEnd(), six.getYEnd(), p2);
 					c.drawLine(seven.getXStart(), seven.getYStart(), seven.getXEnd(), seven.getYEnd(), p2);
 					c.drawLine(eight.getXStart(), eight.getYStart(), eight.getXEnd(), eight.getYEnd(), p2);
-					*/
-					one.drawAnimation2(30, 40, 500);
+					
+					float rot = 6F;
+					int l = 3;
+					int s = 10;
+					one.drawAnimation2(s, 1, rot, l);
+					two.drawAnimation2(s, 1, rot, l);
+					three.drawAnimation2(s, 1, rot, l);
+					four.drawAnimation2(s, 1, rot, l);
+					five.drawAnimation2(s, 1, rot, l);
+					six.drawAnimation2(s, 1, rot, l);
+					seven.drawAnimation2(s, 1, rot, l);
+					eight.drawAnimation2(s, 1, rot, l);
 					/*
 					two.drawAnimation(50, 50, 500);
 					three.drawAnimation(45, 45, 500);
