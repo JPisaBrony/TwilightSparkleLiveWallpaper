@@ -39,17 +39,17 @@ public class MainService extends WallpaperService {
 		//float slopeToCenter = ((corner1.getY() - corner4.getY()) / (corner1.getX() - corner4.getX()));
 		//float slopeToCenter2 = ((corner2.getY() - corner3.getY()) / (corner2.getX() - corner3.getX()));
 		
-		AnimationPoint one = new AnimationPoint(corner1.getX(), corner1.getY(), displayX/2, displayY/2, 1, 1);
-		AnimationPoint five = new AnimationPoint(0, corner3.getY() / 2, displayX/2, displayY/2, 1, 0);
+		AnimationPoint one = new AnimationPoint(corner1.getX() - 500, corner1.getY() - 500, displayX/2, displayY/2, 1, 1, 100);
+		AnimationPoint five = new AnimationPoint(0 - 500, (corner3.getY() / 2), displayX/2, displayY/2, 1, 0, 200);
 		
-		AnimationPoint two = new AnimationPoint(corner2.getX(), corner2.getY(), displayX/2, displayY/2, -1, 1);
-		AnimationPoint six = new AnimationPoint(corner2.getX() / 2, 0, displayX/2, displayY/2, 0, 1);
+		AnimationPoint two = new AnimationPoint(corner2.getX() + 500, corner2.getY() - 500, displayX/2, displayY/2, -1, 1, 100);
+		//AnimationPoint six = new AnimationPoint(corner2.getX() / 2, 0, displayX/2, displayY/2, 0, 1, 100);
 		
-		AnimationPoint three = new AnimationPoint(corner3.getX(), corner3.getY(), displayX/2, displayY/2, 1, -1);
-		AnimationPoint seven = new AnimationPoint(corner2.getX(), corner4.getY() / 2, displayX/2, displayY/2, -1, 0);
+		AnimationPoint three = new AnimationPoint(corner3.getX() - 470, corner3.getY() - 470, displayX/2, displayY/2, 1, -1, 100);
+		AnimationPoint seven = new AnimationPoint(corner2.getX() + 500, corner4.getY() / 2, displayX/2, displayY/2, -1, 0, 200);
 		
-		AnimationPoint four = new AnimationPoint(corner4.getX(), corner4.getY(), displayX/2, displayY/2, -1, -1);
-		AnimationPoint eight = new AnimationPoint(corner4.getX() / 2, corner3.getY(), displayX/2, displayY/2, 0, -1);
+		AnimationPoint four = new AnimationPoint(corner4.getX() + 470, corner4.getY() - 470, displayX/2, displayY/2, -1, -1, 100);
+		//AnimationPoint eight = new AnimationPoint(corner4.getX() / 2, corner3.getY(), displayX/2, displayY/2, 0, -1, 100);
 		
 		RenderEngine() {}
 		
@@ -77,7 +77,7 @@ public class MainService extends WallpaperService {
 				c = holder.lockCanvas();
 
 				if(c != null) {
-					c.drawColor(Color.WHITE);
+					c.drawColor(Color.MAGENTA);
 					Paint p = new Paint();
 					p.setColor(Color.MAGENTA);
 					Paint p2 = new Paint();
@@ -97,21 +97,46 @@ public class MainService extends WallpaperService {
 					c.drawLine(three.getXStart(), three.getYStart(), three.getXEnd(), three.getYEnd(), p2);
 					c.drawLine(four.getXStart(), four.getYStart(), four.getXEnd(), four.getYEnd(), p2);
 					c.drawLine(five.getXStart(), five.getYStart(), five.getXEnd(), five.getYEnd(), p2);
-					c.drawLine(six.getXStart(), six.getYStart(), six.getXEnd(), six.getYEnd(), p2);
+					//c.drawLine(six.getXStart(), six.getYStart(), six.getXEnd(), six.getYEnd(), p2);
 					c.drawLine(seven.getXStart(), seven.getYStart(), seven.getXEnd(), seven.getYEnd(), p2);
-					c.drawLine(eight.getXStart(), eight.getYStart(), eight.getXEnd(), eight.getYEnd(), p2);
+					//c.drawLine(eight.getXStart(), eight.getYStart(), eight.getXEnd(), eight.getYEnd(), p2);
 					
-					float rot = 6F;
-					int l = 3;
-					int s = 10;
-					one.drawAnimation2(s, 1, rot, l);
-					two.drawAnimation2(s, 1, rot, l);
-					three.drawAnimation2(s, 1, rot, l);
-					four.drawAnimation2(s, 1, rot, l);
-					five.drawAnimation2(s, 1, rot, l);
-					six.drawAnimation2(s, 1, rot, l);
-					seven.drawAnimation2(s, 1, rot, l);
-					eight.drawAnimation2(s, 1, rot, l);
+					
+					float sides = 1F;
+					float corners = 1.647F;
+					//seven.drawAnimation3(10, 1, sides);
+					//eight.drawAnimation3(10, 1, sides);
+			
+					if(one.getAnimationEndX() < (displayX/2)) {
+						one.drawAnimation3(30, 1, corners);
+					}
+					if(two.getAnimationEndX() > (displayX/2)) {
+						two.drawAnimation3(26, 1, corners);
+					}
+					if(three.getAnimationEndX() < (displayX/2)) {
+						three.drawAnimation3(24, 1, corners);
+					}
+					if(four.getAnimationEndX() > (displayX/2)) {
+						four.drawAnimation3(20, 1, corners);
+					}
+					if(five.getAnimationEndX() < (displayX/2)) {
+						five.drawAnimation3(17, 1, sides);
+					}
+					if(seven.getAnimationEndX() > (displayX/2)) {
+						seven.drawAnimation3(15, 1, sides);
+					}
+					
+					
+					/*
+					one.drawAnimation2(s, 1, topCorners, l);
+					two.drawAnimation2(s, 1, topCorners, l);
+					three.drawAnimation2(s, 1, topCorners, l);
+					four.drawAnimation2(s, 1, topCorners, l);
+					five.drawAnimation2(s, 1, sides, l);
+					six.drawAnimation2(s, 1, sides, l);
+					seven.drawAnimation2(s, 1, sides, l);
+					eight.drawAnimation2(s, 1, sides, l);
+					*/
 					/*
 					two.drawAnimation(50, 50, 500);
 					three.drawAnimation(45, 45, 500);
@@ -121,6 +146,7 @@ public class MainService extends WallpaperService {
 					seven.drawAnimation(45, 45, 500);
 					eight.drawAnimation(40, 40, 500);
 					*/
+					/*
 					if(one.getAnimationX() > 1000) {
 						one.setAnimationX((int)corner1.getX());
 						one.setAnimationY((int)corner1.getY());
@@ -140,7 +166,7 @@ public class MainService extends WallpaperService {
 						eight.setAnimationX((int)corner4.getX() / 2);
 						eight.setAnimationY((int)corner3.getY());
 					}
-					
+					*/
 					/*
 					float radius = 50F;
 					c.drawLine(x/5, y/4, (x/2) + radius * 4, (y/2) + radius * 3, p2);
