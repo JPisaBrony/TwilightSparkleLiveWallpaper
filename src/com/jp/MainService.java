@@ -78,6 +78,10 @@ public class MainService extends WallpaperService {
 			}
 			secondShape.setTiles(tmp2);
 			grid.addTilesAtCords(secondShape, (int)Math.floor(displayX/textureSize) - s2, (int)Math.floor(displayY/textureSize) - s);
+			
+			android.os.Debug.waitForDebugger();
+			ShapeBase third = new ShapeBase((int)(displayX/textureSize), (int)(displayY/textureSize), stone1);
+			grid.addTilesAtCords(third.getShape(), 0, (int)Math.floor(displayY/textureSize) - (int)Math.floor(displayY/textureSize/5));
 		}
 		
 		@Override

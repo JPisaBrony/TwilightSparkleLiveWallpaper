@@ -50,7 +50,7 @@ public class Grid {
 		int y2 = y;
 		for(int i = 0; i < tiles.getW(); i++) {
 			for(int j = 0; j < tiles.getH(); j++) {
-				if(x > -1 && x < gridWidth && y > -1 && y < gridHeight)
+				if(x > -1 && x < gridWidth && y2 > -1 && y2 < gridHeight)
 					grid[x][y2] = tiles.getTileAtCords(i, j);
 				y2++;
 			}
@@ -63,7 +63,7 @@ public class Grid {
 		int y2 = y;
 		for(int i = 0; i < gridWidth; i++) {
 			for(int j = 0; j < gridHeight; j++) {
-				if(x > -1 && x < gridWidth && y > -1 && y < gridHeight)
+				if(x > -1 && x < gridWidth && y2 > -1 && y2 < gridHeight)
 					grid[x][y2].drawImage(c, i*textureSize, j*textureSize);
 				y2++;
 			}
