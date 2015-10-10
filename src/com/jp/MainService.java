@@ -22,12 +22,62 @@ public class MainService extends WallpaperService {
 		
 		boolean mVisiable = true;
 		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		float displayX = display.getWidth(); 
+		float displayX = display.getWidth();
 		float displayY = display.getHeight();
-		Image background = new Image(R.drawable.stone_01);
+		int textureSize = 16;
+		Image sky = new Image(R.drawable.sky_01);
+		Image stone1 = new Image(R.drawable.stone_01);
+		Image stone5 = new Image(R.drawable.stone_05);
+		Image black = new Image(R.drawable.black_01);
+		Image cloud = new Image(R.drawable.cloud_01);
+		Image sun = new Image(R.drawable.sun_01);
+		Grid grid;
+		boolean firstRun = true;
 		
 		RenderEngine() {
-			background.loadImage(getApplicationContext());
+			sky.loadImage(getApplicationContext());
+			stone1.loadImage(getApplicationContext());
+			stone5.loadImage(getApplicationContext());
+			black.loadImage(getApplicationContext());
+			cloud.loadImage(getApplicationContext());
+			sun.loadImage(getApplicationContext());
+			grid = new Grid(displayX, displayY, textureSize);
+			grid.setGrid(sky);
+			
+			int s = (int)Math.floor(displayX/textureSize/2);
+			ShapeBase first = new ShapeBase(s, s, stone1);
+			Shape firstShape = first.getShape();
+			Image tmp[][] = new Image[s][s];
+			
+			for(int i = 0; i < s; i++) {
+				for(int j = 0; j < s; j++) {
+					if(i < j) {
+						tmp[i][j] = stone1;
+					} else {
+						tmp[i][j] = sky;
+					}
+				}
+			}
+			firstShape.setTiles(tmp);
+			grid.addTilesAtCords(firstShape, 0, (int)Math.floor(displayY/textureSize) - s);
+			
+			int s2 = (int)Math.floor(displayX/textureSize/2);
+			ShapeBase second = new ShapeBase(s2, s2, stone1);
+			Shape secondShape = second.getShape();
+			Image tmp2[][] = new Image[s2][s2];
+			int inc = s2;
+			for(int i = 0; i < s2; i++) {
+				for(int j = 0; j < s2; j++) {
+					if(j > inc) {
+						tmp2[i][j] = stone1;
+					} else {
+						tmp2[i][j] = sky;
+					}
+				}
+				inc--;
+			}
+			secondShape.setTiles(tmp2);
+			grid.addTilesAtCords(secondShape, (int)Math.floor(displayX/textureSize) - s2, (int)Math.floor(displayY/textureSize) - s);
 		}
 		
 		@Override
@@ -54,8 +104,10 @@ public class MainService extends WallpaperService {
 				c = holder.lockCanvas();
 
 				if(c != null) {
-					background.drawImage(c, 100, 100);
-
+					//if(firstRun) {
+						grid.drawGrid(c);
+					//	firstRun = false;
+					//}
 				}
 			} finally {
 				if(c != null)
