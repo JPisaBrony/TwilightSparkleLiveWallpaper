@@ -5,10 +5,12 @@ public class Shape {
 	private int x;
 	private int y;
 	private Image[][] tiles;
+	private Image image;
 	
 	public Shape(int x, int y, int w, int h, Image img) {
 		this.x = x;
 		this.y = y;
+		this.image = img;
 		tiles = new Image[w][h];
 		for(int i = 0; i < w; i++) {
 			for(int j = 0; j < h; j++) {
@@ -59,5 +61,15 @@ public class Shape {
     
     public Image getTileAtCords(int x, int y) {
     	return tiles[x][y];
+    }
+    
+    public Image getImage() {
+    	return image;
+    }
+    
+    public Shape copyShape() {
+    	Shape tmp = new Shape(x, y, tiles.length, tiles[0].length, image);
+    	tmp.setTiles(tiles);
+    	return tmp;
     }
 }

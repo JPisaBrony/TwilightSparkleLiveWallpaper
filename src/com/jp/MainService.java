@@ -7,6 +7,9 @@ import android.service.wallpaper.WallpaperService;
 import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
+
+import java.util.LinkedList;
+
 import com.jp.Image;
 
 public class MainService extends WallpaperService {
@@ -32,7 +35,9 @@ public class MainService extends WallpaperService {
 		Image cloud = new Image(R.drawable.cloud_01);
 		Image sun = new Image(R.drawable.sun_01);
 		Grid grid;
-		boolean firstRun = true;
+		Cloud cloudBase;
+		LinkedList<Shape> clouds = new LinkedList<Shape>();
+		int cloudInterval = 0;
 		
 		RenderEngine() {
 			sky.loadImage(getApplicationContext());
@@ -82,6 +87,8 @@ public class MainService extends WallpaperService {
 			int s3 = (int)Math.floor(displayY/textureSize) - (int)Math.floor(displayY/textureSize/5);
 			ShapeBase third = new ShapeBase(s3, (int)Math.floor(displayY/textureSize), stone1);
 			grid.addTilesAtCords(third.getShape(), 0, s3);
+			
+			cloudBase = new Cloud(sky, cloud, (int)displayX - 10);
 		}
 		
 		@Override
@@ -108,10 +115,22 @@ public class MainService extends WallpaperService {
 				c = holder.lockCanvas();
 
 				if(c != null) {
-					//if(firstRun) {
-						grid.drawGrid(c);
-					//	firstRun = false;
-					//}
+					grid.drawGrid(c);
+					
+					if(cloudInterval % 15 == 0) {
+						Shape tempcloud = cloudBase.newCloud();
+						clouds.addFirst(tempcloud);
+					}
+					
+					for(int k = 0; k < clouds.size(); k++) {
+						clouds.get(k).incrementX();
+						grid.addTilesAtCords(clouds.get(k), clouds.get(k).getX(), clouds.get(k).getY());
+					}
+					
+					if(clouds.size() > 20)
+						clouds.removeLast();
+					
+					cloudInterval++;
 				}
 			} finally {
 				if(c != null)

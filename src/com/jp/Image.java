@@ -21,4 +21,5 @@ public class Image {
 	public void drawImage(Canvas c, int x, int y) {
 		c.drawBitmap(image, x, y, null);
 	}
+	
 }

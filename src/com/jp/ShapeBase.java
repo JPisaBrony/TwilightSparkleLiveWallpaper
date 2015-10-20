@@ -8,6 +8,10 @@ public class ShapeBase {
 		shape = new Shape(0, 0, w, h, img);
 	}
 	
+	public ShapeBase(int x, int y, int w, int h, Image img) {
+		shape = new Shape(x, y, w, h, img);
+	}
+	
 	public void crossBase(Image img) {
 		int[] vals = findCenter();
 		Image[][] s = shape.getTiles();
@@ -21,8 +25,8 @@ public class ShapeBase {
 	
 	public int[] findCenter() {
 		int[] vals = new int[2];
-		vals[0] = (int)Math.floor(shape.getH()/2);
-		vals[1] = (int)Math.floor(shape.getW()/2);
+		vals[0] = (int)Math.floor(shape.getW()/2);
+		vals[1] = (int)Math.floor(shape.getH()/2);
 		return vals;
 	}
 	
@@ -32,5 +36,13 @@ public class ShapeBase {
 	
 	public void setShape(Shape s) {
 		shape = s;
+	}
+	
+	public Image[][] getTilesFromShape() {
+		return shape.getTiles();
+	}
+	
+	public void setTilesInShape(Image[][] tiles) {
+		shape.setTiles(tiles);
 	}
 }
