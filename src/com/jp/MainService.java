@@ -88,7 +88,7 @@ public class MainService extends WallpaperService {
 			ShapeBase third = new ShapeBase(s3, (int)Math.floor(displayY/textureSize), stone1);
 			grid.addTilesAtCords(third.getShape(), 0, s3);
 			
-			cloudBase = new Cloud(sky, cloud, (int)displayX - 10);
+			cloudBase = new Cloud(sky, cloud, (int)Math.floor(displayX/textureSize/3));
 		}
 		
 		@Override
@@ -115,8 +115,6 @@ public class MainService extends WallpaperService {
 				c = holder.lockCanvas();
 
 				if(c != null) {
-					grid.drawGrid(c);
-					
 					if(cloudInterval % 15 == 0) {
 						Shape tempcloud = cloudBase.newCloud();
 						clouds.addFirst(tempcloud);
@@ -127,10 +125,12 @@ public class MainService extends WallpaperService {
 						grid.addTilesAtCords(clouds.get(k), clouds.get(k).getX(), clouds.get(k).getY());
 					}
 					
-					if(clouds.size() > 20)
+					if(clouds.size() > 10)
 						clouds.removeLast();
 					
 					cloudInterval++;
+					
+					grid.drawGrid(c);
 				}
 			} finally {
 				if(c != null)
